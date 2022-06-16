@@ -1,0 +1,24 @@
+{
+  "name": "meek-stv",
+  "version": "1.0.0",
+  "main": "./dist/cjs/index.js",
+  "repository": "git@github.com:TateB/meek-stv.git",
+  "author": "tate <tate@ens.domains>",
+  "license": "MIT",
+  "exports": {
+    "import": "./dist/esm/index.js",
+    "require": "./dist/cjs/index.js"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.cjs.json && tsc -p tsconfig.esm.json"
+  },
+  "devDependencies": {
+    "ts-node": "^10.8.1",
+    "typescript": "^4.7.3"
+  },
+  "packageManager": "yarn@3.2.1"
+}

@@ -163,16 +163,19 @@ export class Meek {
     return this.eliminate([lowestCandidate]);
   };
 
-  private createLog = (): State => ({
-    candidates: this.candidates,
-    seats: this.seats,
-    excess: this.excess,
-    totalVotes: this.totalVotes,
-    hbFactor: this.hbFactor,
-    quota: this.quota,
-    electedCount: this.electedCount,
-    roundNumber: this.roundNumber,
-  });
+  private createLog = (): State =>
+    JSON.parse(
+      JSON.stringify({
+        candidates: this.candidates,
+        seats: this.seats,
+        excess: this.excess,
+        totalVotes: this.totalVotes,
+        hbFactor: this.hbFactor,
+        quota: this.quota,
+        electedCount: this.electedCount,
+        roundNumber: this.roundNumber,
+      })
+    );
 
   public count = () => {
     while (this.electedCount < this.seats) {
@@ -187,7 +190,10 @@ export class Meek {
     return {
       electedCandidates: this.candidates
         .filter((candidate) => candidate.status === "elected")
-        .map((candidate) => candidate.name),
+        .map((candidate) => ({
+          ...candidate,
+          unweightedVotes: candidate.votes / candidate.weight,
+        })),
       log: this.log,
     };
   };

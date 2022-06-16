@@ -5,17 +5,8 @@ export type Config = {
   allowTies?: boolean;
   minSeats?: number;
   maxSeats?: number;
-  electionSeats?: number;
   ballots?: Ballot[];
   candidates: string[];
-};
-
-const defaultConfig = {
-  allowTies: false,
-  minSeats: 0,
-  maxSeats: Infinity,
-  ballots: [],
-  candidates: [],
 };
 
 export class Election {
@@ -26,10 +17,13 @@ export class Election {
   public maxSeats: number;
 
   constructor(config: Config) {
-    const configWithDefaults = (config = {
-      ...defaultConfig,
+    const configWithDefaults = {
+      allowTies: false,
+      minSeats: 0,
+      maxSeats: Infinity,
+      ballots: [],
       ...config,
-    });
+    };
 
     this.ballots = configWithDefaults.ballots;
     this._providedCandidates = configWithDefaults.candidates;
@@ -71,7 +65,7 @@ export class Election {
     }
   };
 
-  public count = (seats: number = 1) => {
+  public run = (seats: number = 1) => {
     if (seats < 1) {
       throw new Error("Invalid number of seats.");
     }

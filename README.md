@@ -2,6 +2,8 @@
 
 **a lightweight meek stv javascript library**
 
+based on [caritat](https://github.com/anarchodin/caritat)
+
 ## Usage
 
 import Election and Ballot from the package
